@@ -55,6 +55,7 @@ namespace PromDresses.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Name,DateRegister")] Collection collection)
         {
+            collection.DateRegister = DateTime.Now;
             if (ModelState.IsValid)
             {
                 _context.Add(collection);
@@ -91,7 +92,7 @@ namespace PromDresses.Controllers
             {
                 return NotFound();
             }
-
+            collection.DateRegister = DateTime.Now;
             if (ModelState.IsValid)
             {
                 try

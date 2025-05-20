@@ -1,11 +1,31 @@
 ﻿@model PromDresses.Data.Accessorie
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Детайли";
 }
-
-<h1>Details</h1>
-
+<br />
+<br />
+<br />
+<br />
+<div class="SecoundPageName">
+    <p>ДЕТАЙЛИ ЗА @Model.NameAccessorie.ToUpper()</p>
+</div>
+<div id="cards" class="card d-flex flex-row align-items-center p-3">
+    <div class="col-md-6 text-center">
+        <img src="@Html.DisplayFor(model=>model.URLimages)" width="370" class="img-fluid" />
+    </div>
+    <div class="col-md-6">
+        <div class="card-body text-left">
+            <p class="card-text"><h5>Каталожен номер</h5> @Html.DisplayFor(model => model.CNumber)</p>
+            <p class="card-text"><h5> Име </h5>@Html.DisplayFor(model => model.NameAccessorie)</p>
+            <p class="card-text"><h5>Колекция</h5>@Html.DisplayFor(model => model.Collections.Name)</p>
+            <p class="card-text"><h5> Описание </h5>@Html.DisplayFor(model => model.Description)</p>
+            <p class="card-text"><h5>Цена</h5>@Html.DisplayFor(model => model.Price)</p>
+        </div>
+    </div>
+</div>
+@if (User.IsInRole("Admin"))
+{
 <div>
     <h4>Accessorie</h4>
     <hr />
@@ -54,7 +74,11 @@
         </dd>
     </dl>
 </div>
+}
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    @if (User.IsInRole("Admin"))
+    {
+      <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn text-white mt-4" style="background-color:#f1cec6;">Промяна</a> 
+    }
+    <a asp-action="Index" class="btn text-white mt-4" style="background-color:#f1cec6;">Назад</a>
 </div>

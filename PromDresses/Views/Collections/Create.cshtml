@@ -3,10 +3,14 @@
 @{
     ViewData["Title"] = "Create";
 }
-
-<h1>Create</h1>
-
-<h4>Collection</h4>
+<br />
+<br />
+<br />
+<br />
+<div style="font-family:'Times New Roman', Times, serif">
+    <h1>Създай</h1>
+</div>
+<h4>Колекция</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -18,11 +22,6 @@
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="DateRegister" class="control-label"></label>
-                <input asp-for="DateRegister" class="form-control" />
-                <span asp-validation-for="DateRegister" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
@@ -30,7 +29,7 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index" class="btn text-white" style="background-color:#f1cec6;">Назад</a>
 </div>
 
 @section Scripts {

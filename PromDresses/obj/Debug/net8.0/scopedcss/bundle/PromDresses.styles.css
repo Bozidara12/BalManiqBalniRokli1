@@ -9,7 +9,9 @@ a.navbar-brand[b-nn25fnp611] {
 }
 
 a[b-nn25fnp611] {
-  color: #0077cc;
+    /*color: #0077cc;*/
+   
+   
 }
 
 .btn-primary[b-nn25fnp611] {
@@ -39,11 +41,29 @@ button.accept-policy[b-nn25fnp611] {
   font-size: 1rem;
   line-height: inherit;
 }
+nav ul[b-nn25fnp611] {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 15px 15px;
+    align-content: center;
+}
+
+    nav ul li a[b-nn25fnp611] {
+        color: #000;
+    }
+
 
 .footer[b-nn25fnp611] {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  white-space: nowrap;
-  line-height: 60px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    line-height: 60px;
+    background-color: #f1cec6;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    text-align: center;
+    text-decoration: none;
 }

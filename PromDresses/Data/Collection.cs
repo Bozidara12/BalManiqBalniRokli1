@@ -7,6 +7,5 @@
         public DateTime DateRegister { get; set; }
         public ICollection<Dress>  Dresses { get; set; }
         public ICollection<Accessorie> Accessories { get; set; }
-
     }
 }

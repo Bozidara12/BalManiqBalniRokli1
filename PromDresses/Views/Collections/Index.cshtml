@@ -1,22 +1,84 @@
 ﻿@model IEnumerable<PromDresses.Data.Collection>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Колекции";
 }
+<br />
+<br />
+<br />
+<br />
+<head>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
 
-<h1>Index</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
+<div class="SecoundPageName">
+    <p>КОЛЕКЦИИ БАЛНИ РОКЛИ И АКСЕСОАРИ</p>
+</div>
+<hr  />
+<br />
+<div class="card">
+    <div class="card-body">
+        <img id="imghover" src="~/Images/LongDress7.jpg" width="400px" />
+        <br />
+        <br />
+        <hr />
+        <h4 style="font-family:'Times New Roman', Times, serif">Вечна грация</h4>
+        <hr />
+    </div>
+    <div class="card-body">
+        <img id ="imghover" src="~/Images/LongDress8.jpg" width="400px" />
+        <br />
+        <br />
+        <hr />
+        <h4 style="font-family:'Times New Roman', Times, serif">Цветно вълшебство</h4>
+        <hr />
+    </div>
+    <div class="card-body">
+        <img id="imghover" src="~/Images/LogoDress9.jpg" width="400px" />
+        <br /> 
+        <br />
+        <hr />
+        <h4 style="font-family:'Times New Roman', Times, serif">Цветен блясък</h4>
+        <hr />
+    </div>
+</div>
+<div class="card">
+    <div class="card-body">
+        <img id="imghover" src="~/Images/LogoAccess1.jpg" width="400px" />
+        <br />
+        <br />
+        <hr />
+        <h4 style="font-family:'Times New Roman', Times, serif">Сияние и стил</h4>
+        <hr />
+    </div>
+    <div class="card-body">
+        <img id="imghover" src="~/Images/LogoAccess2.jpg" width="400px" />
+        <br />
+        <br />
+        <hr /> 
+        <h4 style="font-family:'Times New Roman', Times, serif">Вечна Елегантност</h4>
+        <hr />
+    </div>
+</div>
+@if (User.IsInRole("Admin"))
+{
+    <p style="font-family:'Times New Roman', Times, serif">
+        <a asp-action="Create">Добави</a>
+    </p>
+}
+@if(User.IsInRole("Admin"))
+{
+<table class="table" style="font-family:'Times New Roman', Times, serif">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+                @*  @Html.DisplayNameFor(model => model.Name) *@
+                Име на колекцията
+
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DateRegister)
+               @*  @Html.DisplayNameFor(model => model.DateRegister) *@
+                Дата и час на създаване
             </th>
             <th></th>
         </tr>
@@ -26,16 +88,22 @@
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
+              
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.DateRegister)
+  
             </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
+                @if (User.IsInRole("Admin"))
+                {          
+                 <td>
+                 <a asp-action="Edit" asp-route-id="@item.Id">Промяна</a> |
+                 <a asp-action="Details" asp-route-id="@item.Id">Детайли</a> |
+                 <a asp-action="Delete" asp-route-id="@item.Id">Изтриване</a>
+                 </td>
+                }
         </tr>
 }
     </tbody>
 </table>
+    }

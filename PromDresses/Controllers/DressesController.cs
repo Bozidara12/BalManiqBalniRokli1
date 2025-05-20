@@ -51,20 +51,21 @@ namespace PromDresses.Controllers
             return View();
         }
 
-        // POST: Dresses/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: Dresses/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,CNumber,NameDress,CollectionId,Size,Description,URLimages,Price,DateRegister")] Dress dress)
         {
+            dress.DateRegister=DateTime.Now;
             if (ModelState.IsValid)
             {
                 _context.Add(dress);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CollectionId"] = new SelectList(_context.Collections, "Id", "Id", dress.CollectionId);
+            ViewData["CollectionId"] = new SelectList(_context.Collections, "Id", "Name", dress.CollectionId);
             return View(dress);
         }
 
@@ -81,13 +82,14 @@ namespace PromDresses.Controllers
             {
                 return NotFound();
             }
-            ViewData["CollectionId"] = new SelectList(_context.Collections, "Id", "Id", dress.CollectionId);
+            ViewData["CollectionId"] = new SelectList(_context.Collections, "Id", "Name", dress.CollectionId);
             return View(dress);
         }
 
-        // POST: Dresses/Edit/5
+       
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: Dresses/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,CNumber,NameDress,CollectionId,Size,Description,URLimages,Price,DateRegister")] Dress dress)
@@ -96,7 +98,7 @@ namespace PromDresses.Controllers
             {
                 return NotFound();
             }
-
+            dress.DateRegister = DateTime.Now;
             if (ModelState.IsValid)
             {
                 try
@@ -117,7 +119,7 @@ namespace PromDresses.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CollectionId"] = new SelectList(_context.Collections, "Id", "Id", dress.CollectionId);
+            ViewData["CollectionId"] = new SelectList(_context.Collections, "Id", "Name", dress.CollectionId);
             return View(dress);
         }
 

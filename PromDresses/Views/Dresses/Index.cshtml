@@ -3,76 +3,118 @@
 @{
     ViewData["Title"] = "Index";
 }
-
-<h1>Index</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.CNumber)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NameDress)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Collections.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Size)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.URLimages)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Price)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DateRegister)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.CNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NameDress)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Collections.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Size)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                <img src="@item.URLimages" width="100" />
-             @*    @Html.DisplayFor(modelItem => item.URLimages) *@
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DateRegister)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
+<br />
+<br/>
+<br />
+<div class="mt-5" style="font-family:'Times New Roman', Times, serif" >
+    <h2>КАТАЛОГ БАЛНИ РОКЛИ</h2>
+</div>
+<hr />
+@if (User.IsInRole("Admin"))
+{
+    <p>
+        <a asp-action="Create">Добави рокля</a>
+    </p>
 }
-    </tbody>
-</table>
+<br />
+<div class="row">
+
+
+    @foreach (var dress in Model)
+    {
+        <div class="col-md-4 mb-4" style="font-family:'Times New Roman', Times, serif" >
+            <div id="cards" class="card h-100 d-flex flex-column mb-2">
+                <a asp-controller="Dresses" asp-action="Details" asp-route-Id="@dress.Id" style="text-decoration:none;color:black;">
+                    <img id="imgfordresses" src="@dress.URLimages" class="card-img-top" alt="@dress.NameDress" />
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">@dress.NameDress</h5>
+                        <p class="card-text">@dress.CNumber</p>
+                      @*   <p class="card-text">@dress.Description</p> *@
+                        <p class="card-text">@dress.Size</p>
+                        <p class="card-text"><strong>Цена: @dress.Price лв.</strong></p>
+                        <a asp-controller="OrderDresses" asp-action="CreateId" asp-route-id="@dress.Id" id="btnhover" class="btn text-white " style="background-color:#f1cec6;">Купи</a>
+                    </div>
+                </a>
+            </div>
+        </div>
+    }
+</div>
+@if (User.IsInRole("Admin"))
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @*  @Html.DisplayNameFor(model => model.CNumber) *@
+                    Каталожен номер
+                </th>
+                <th>
+                    @* @Html.DisplayNameFor(model => model.NameDress) *@
+                    Име на роклята
+                </th>
+                <th>
+                    @*    @Html.DisplayNameFor(model => model.Collections) *@
+                    Колекция
+                </th>
+                <th>
+                    @*   @Html.DisplayNameFor(model => model.Size) *@
+                    Размер
+                </th>
+                <th>
+                    @* @Html.DisplayNameFor(model => model.Description) *@
+                    Описание
+                </th>
+                <th>
+                    @*  @Html.DisplayNameFor(model => model.URLimages) *@
+                    Снимка
+                </th>
+                <th>
+                    @*    @Html.DisplayNameFor(model => model.Price) *@
+                    Цена
+                </th>
+                @*  <th>
+            @Html.DisplayNameFor(model => model.DateRegister)
+            Дата
+            </th> *@
+                @*  <th></th> *@
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NameDress)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Collections.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Size)
+                    </td>
+                  @*   <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td> *@
+                    <td>
+                        <img src="@item.URLimages" width="100" />
+                       
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                    @* <td>
+            @Html.DisplayFor(modelItem => item.DateRegister)
+            </td> *@
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id">Промяна</a> |
+                        <a asp-action="Details" asp-route-id="@item.Id">Детайли</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id">Изтриване</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

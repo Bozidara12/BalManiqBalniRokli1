@@ -5,6 +5,62 @@
       "PackagePath": "staticwebassets\\PromDresses.bundle.scp.css"
     },
     {
+      "Id": "C:\\Users\\ASUS\\source\\repos\\PromDresses\\PromDresses\\wwwroot\\Images\\Asseccories.png",
+      "PackagePath": "staticwebassets\\Images\\Asseccories.png"
+    },
+    {
+      "Id": "C:\\Users\\ASUS\\source\\repos\\PromDresses\\PromDresses\\wwwroot\\Images\\Background1.png",
+      "PackagePath": "staticwebassets\\Images\\Background1.png"
+    },
+    {
+      "Id": "C:\\Users\\ASUS\\source\\repos\\PromDresses\\PromDresses\\wwwroot\\Images\\LogoAccess1.jpg",
+      "PackagePath": "staticwebassets\\Images\\LogoAccess1.jpg"
+    },
+    {
+      "Id": "C:\\Users\\ASUS\\source\\repos\\PromDresses\\PromDresses\\wwwroot\\Images\\LogoAccess2.jpg",
+      "PackagePath": "staticwebassets\\Images\\LogoAccess2.jpg"
+    },
+    {
+      "Id": "C:\\Users\\ASUS\\source\\repos\\PromDresses\\PromDresses\\wwwroot\\Images\\LogoDress9.jpg",
+      "PackagePath": "staticwebassets\\Images\\LogoDress9.jpg"
+    },
+    {
+      "Id": "C:\\Users\\ASUS\\source\\repos\\PromDresses\\PromDresses\\wwwroot\\Images\\LongDress.png",
+      "PackagePath": "staticwebassets\\Images\\LongDress.png"
+    },
+    {
+      "Id": "C:\\Users\\ASUS\\source\\repos\\PromDresses\\PromDresses\\wwwroot\\Images\\LongDress1.png",
+      "PackagePath": "staticwebassets\\Images\\LongDress1.png"
+    },
+    {
+      "Id": "C:\\Users\\ASUS\\source\\repos\\PromDresses\\PromDresses\\wwwroot\\Images\\LongDress2.png",
+      "PackagePath": "staticwebassets\\Images\\LongDress2.png"
+    },
+    {
+      "Id": "C:\\Users\\ASUS\\source\\repos\\PromDresses\\PromDresses\\wwwroot\\Images\\LongDress3.png",
+      "PackagePath": "staticwebassets\\Images\\LongDress3.png"
+    },
+    {
+      "Id": "C:\\Users\\ASUS\\source\\repos\\PromDresses\\PromDresses\\wwwroot\\Images\\LongDress4.png",
+      "PackagePath": "staticwebassets\\Images\\LongDress4.png"
+    },
+    {
+      "Id": "C:\\Users\\ASUS\\source\\repos\\PromDresses\\PromDresses\\wwwroot\\Images\\LongDress5.png",
+      "PackagePath": "staticwebassets\\Images\\LongDress5.png"
+    },
+    {
+      "Id": "C:\\Users\\ASUS\\source\\repos\\PromDresses\\PromDresses\\wwwroot\\Images\\LongDress6.png",
+      "PackagePath": "staticwebassets\\Images\\LongDress6.png"
+    },
+    {
+      "Id": "C:\\Users\\ASUS\\source\\repos\\PromDresses\\PromDresses\\wwwroot\\Images\\LongDress7.jpg",
+      "PackagePath": "staticwebassets\\Images\\LongDress7.jpg"
+    },
+    {
+      "Id": "C:\\Users\\ASUS\\source\\repos\\PromDresses\\PromDresses\\wwwroot\\Images\\LongDress8.jpg",
+      "PackagePath": "staticwebassets\\Images\\LongDress8.jpg"
+    },
+    {
       "Id": "C:\\Users\\ASUS\\source\\repos\\PromDresses\\PromDresses\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },
@@ -243,6 +299,10 @@
     {
       "Id": "C:\\Users\\ASUS\\source\\repos\\PromDresses\\PromDresses\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
+    },
+    {
+      "Id": "C:\\Users\\ASUS\\source\\repos\\PromDresses\\PromDresses\\wwwroot\\logo.ico",
+      "PackagePath": "staticwebassets\\logo.ico"
     },
     {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.PromDresses.Microsoft.AspNetCore.StaticWebAssets.props",

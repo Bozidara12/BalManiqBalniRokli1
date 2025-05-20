@@ -2,27 +2,48 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
 using PromDresses.Data;
 
 namespace PromDresses.Controllers
 {
+    [Authorize]
     public class OrderDressesController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<User> _userManager;    
 
-        public OrderDressesController(ApplicationDbContext context)
+        public OrderDressesController(ApplicationDbContext context, UserManager<User> userManager)
         {
             _context = context;
+            _userManager = userManager; 
         }
 
         // GET: OrderDresses
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.OrderDresses.Include(o => o.Dress).Include(o => o.Users);
-            return View(await applicationDbContext.ToListAsync());
+            if (User.IsInRole("Admin"))
+            {
+                var DbContext = _context.OrderDresses
+                                    .Include(o => o.Users)
+                                    .Include(o => o.Dresses);
+                return View(await DbContext.ToListAsync());
+            }
+            else
+            {
+                var DbContext = _context.OrderDresses
+                                    .Include(o => o.Users)
+                                    .Include(o => o.Dresses)
+                                    .Where(x => x.UserId == _userManager.GetUserId(User));
+                return View(await DbContext.ToListAsync());
+            }
+
+
         }
 
         // GET: OrderDresses/Details/5
@@ -34,7 +55,7 @@ namespace PromDresses.Controllers
             }
 
             var orderDress = await _context.OrderDresses
-                .Include(o => o.Dress)
+                .Include(o => o.Dresses)
                 .Include(o => o.Users)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (orderDress == null)
@@ -48,26 +69,42 @@ namespace PromDresses.Controllers
         // GET: OrderDresses/Create
         public IActionResult Create()
         {
-            ViewData["DressId"] = new SelectList(_context.Dresses, "Id", "Id");
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id");
+            ViewData["DressId"] = new SelectList(_context.Dresses, "Id", "NameDress");
+            //ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id");
             return View();
         }
-
+        public async Task<IActionResult> CreateId(int id)
+        {
+            OrderDress order = new OrderDress();
+            order.DressId = id;
+            order.UserId = _userManager.GetUserId(User);
+            order.DateRegister = DateTime.Now;
+            if (ModelState.IsValid)
+            {
+               _context.OrderDresses.Add(order);    
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            ViewData["DressId"]=new SelectList(_context.OrderDresses, "Id","Name", order.DressId);
+            return View(order);  
+        }
         // POST: OrderDresses/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,UserId,DressId,DateRegister")] OrderDress orderDress)
+        public async Task<IActionResult> Create([Bind("DressId")] OrderDress orderDress)
         {
+            orderDress.DateRegister = DateTime.Now;
+            orderDress.UserId =_userManager.GetUserId(User);
             if (ModelState.IsValid)
             {
                 _context.Add(orderDress);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["DressId"] = new SelectList(_context.Dresses, "Id", "Id", orderDress.DressId);
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", orderDress.UserId);
+            ViewData["DressId"] = new SelectList(_context.Dresses, "Id", "NameDress", orderDress.DressId);
+            //ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", orderDress.UserId);
             return View(orderDress);
         }
 
@@ -84,8 +121,8 @@ namespace PromDresses.Controllers
             {
                 return NotFound();
             }
-            ViewData["DressId"] = new SelectList(_context.Dresses, "Id", "Id", orderDress.DressId);
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", orderDress.UserId);
+            ViewData["DressId"] = new SelectList(_context.Dresses, "Id", "NameDress", orderDress.DressId);
+            //ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", orderDress.UserId);
             return View(orderDress);
         }
 
@@ -94,18 +131,19 @@ namespace PromDresses.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,UserId,DressId,DateRegister")] OrderDress orderDress)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,DressId")] OrderDress orderDress)
         {
             if (id != orderDress.Id)
             {
                 return NotFound();
             }
-
+            orderDress.UserId = _userManager.GetUserId(User);
+            orderDress.DateRegister = DateTime.Now;
             if (ModelState.IsValid)
             {
                 try
                 {
-                    _context.Update(orderDress);
+                    _context.OrderDresses.Update(orderDress);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -121,8 +159,8 @@ namespace PromDresses.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["DressId"] = new SelectList(_context.Dresses, "Id", "Id", orderDress.DressId);
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", orderDress.UserId);
+            ViewData["DressId"] = new SelectList(_context.Dresses, "Id", "NameDress", orderDress.DressId);
+            //ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", orderDress.UserId);
             return View(orderDress);
         }
 
@@ -135,7 +173,7 @@ namespace PromDresses.Controllers
             }
 
             var orderDress = await _context.OrderDresses
-                .Include(o => o.Dress)
+                .Include(o => o.Dresses)
                 .Include(o => o.Users)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (orderDress == null)

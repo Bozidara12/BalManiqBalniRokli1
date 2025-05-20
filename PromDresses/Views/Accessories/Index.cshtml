@@ -1,38 +1,78 @@
 ﻿@model IEnumerable<PromDresses.Data.Accessorie>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Аксесоари";
 }
+<br />
+<br />
+<br />
+<br />
+<div class="SecoundPageName">
+    <p>БАЛНИ АКСЕСОАРИ</p>
+</div>
+<hr />
 
-<h1>Index</h1>
+@if (User.IsInRole("Admin"))
+{
+    <p>
+        <a asp-action="Create">Добави аксесоар</a>
+    </p>
+}
+<br />
+<div class="row">
+    @foreach (var accessorie in Model)
+    {
+        <div class="col-md-4 mb-4" style="font-family:'Times New Roman', Times, serif">
+            <div id="cards" class="card h-100 d-flex flex-column mb-2">
+                <a asp-controller="Accessories" asp-action="Details" asp-route-Id="@accessorie.Id" style="text-decoration:none;color:black;">
+                    <img id="imgforaccessories" src="@accessorie.URLimages" class="card-img-top mt-2" alt="@accessorie.NameAccessorie" />
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">@accessorie.NameAccessorie</h5>
+                        <p class="card-text">@accessorie.CNumber</p>
+                        @* <p class="card-text">@accessorie.Description</p> *@
+                        <p class="card-text">@accessorie.Collections.Name</p>
+                        <p class="card-text"><strong>Цена: @accessorie.Price лв.</strong></p>
+                        <a asp-controller="OrderAccessories" asp-action="CreateId" asp-route-id="@accessorie.Id" id="btnhover" class="btn text-white" style="background-color:#f1cec6;">Купи</a>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    }
+</div>
+@if (User.IsInRole("Admin"))
+{
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.CNumber)
+               @*  @Html.DisplayNameFor(model => model.CNumber) *@
+               Каталожен номер
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.NameAccessorie)
+                @* @Html.DisplayNameFor(model => model.NameAccessorie) *@
+                Име на аксесоара
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Collections)
+               @*  @Html.DisplayNameFor(model => model.Collections) *@
+               Колекция
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Description)
+                @* @Html.DisplayNameFor(model => model.Description) *@
+                Описание
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.URLimages)
+               @*  @Html.DisplayNameFor(model => model.URLimages) *@
+               Снимка
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Price)
+               @*  @Html.DisplayNameFor(model => model.Price) *@
+               Цена
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DateRegister)
-            </th>
+          @*   <th>
+                @Html.DisplayNameFor(model => model.DateRegister) 
+             
+            </th> *@
             <th></th>
         </tr>
     </thead>
@@ -48,24 +88,26 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Collections.Id)
             </td>
-            <td>
+          @*   <td>
                 @Html.DisplayFor(modelItem => item.Description)
-            </td>
+            </td> *@
             <td>
-                @Html.DisplayFor(modelItem => item.URLimages)
+                @* @Html.DisplayFor(modelItem => item.URLimages) *@
+                   @*  <img src="@item.URLimages" width="100" /> *@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Price)
             </td>
-            <td>
+           @*  <td>
                 @Html.DisplayFor(modelItem => item.DateRegister)
-            </td>
+            </td> *@
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.Id">Промяна</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Детайли</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Изтриване</a>
             </td>
         </tr>
 }
     </tbody>
 </table>
+}

@@ -6,7 +6,7 @@
         public string UserId {  get; set; } 
         public User Users { get; set; }
         public int DressId {  get; set; }
-        public Dress Dress { get; set; }
+        public Dress Dresses { get; set; }
         public DateTime DateRegister { get; set; }
     }
 }

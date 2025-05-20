@@ -16,7 +16,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("PromDresses")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+11d1a0b9baf8e65588ae8139d5734a6295587252")]
 [assembly: System.Reflection.AssemblyProductAttribute("PromDresses")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PromDresses")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

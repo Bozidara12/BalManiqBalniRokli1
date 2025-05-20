@@ -1,36 +1,44 @@
 ﻿@model PromDresses.Data.OrderDress
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Детайли";
 }
+<br />
+<br />
+<br />
+<br />
+<h1 style="font-family:'Times New Roman', Times, serif">Детайли за поръчката</h1>
 
-<h1>Details</h1>
-
-<div>
-    <h4>OrderDress</h4>
-    <hr />
+<div style="font-family:'Times New Roman', Times, serif">
     <dl class="row">
-        <dt class = "col-sm-2">
+            @if (User.IsInRole("Admin"))
+            {       
+            <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Users)
-        </dt>
-        <dd class = "col-sm-10">
+            </dt>
+            <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Users.Id)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Dress)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Dress.Id)
-        </dd>
-        <dt class = "col-sm-2">
+           </dd>
+            }
+           <dt class = "col-sm-2">
+          @*   @Html.DisplayNameFor(model => model.Dresses) *@
+          Рокля
+           </dt>
+           <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Dresses.Id)
+            </dd>
+            @if (User.IsInRole("Admin"))
+            {      
+            <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.DateRegister)
-        </dt>
-        <dd class = "col-sm-10">
+           </dt>
+            <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.DateRegister)
-        </dd>
+            </dd>
+            }
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn text-white mt-4" style="background-color:#f1cec6;">Промяна</a> |
+    <a asp-action="Index" class="btn text-white mt-4" style="background-color:#f1cec6;">Назад</a>
 </div>

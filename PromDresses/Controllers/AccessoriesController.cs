@@ -58,6 +58,7 @@ namespace PromDresses.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,CNumber,NameAccessorie,CollectionId,Description,URLimages,Price,DateRegister")] Accessorie accessorie)
         {
+            accessorie.DateRegister=DateTime.Now;
             if (ModelState.IsValid)
             {
                 _context.Add(accessorie);
@@ -81,7 +82,7 @@ namespace PromDresses.Controllers
             {
                 return NotFound();
             }
-            ViewData["CollectionId"] = new SelectList(_context.Collections, "Id", "Id", accessorie.CollectionId);
+            ViewData["CollectionId"] = new SelectList(_context.Collections, "Id", "Name", accessorie.CollectionId);
             return View(accessorie);
         }
 
@@ -96,7 +97,7 @@ namespace PromDresses.Controllers
             {
                 return NotFound();
             }
-
+            accessorie.DateRegister = DateTime.Now;
             if (ModelState.IsValid)
             {
                 try

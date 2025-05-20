@@ -3,23 +3,38 @@
 @{
     ViewData["Title"] = "Index";
 }
-
-<h1>Index</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
+<br />
+<br />
+<br />
+<br />
+<h1 style="font-family:'Times New Roman', Times, serif">Кошница</h1>
+@if (User.IsInRole("Adem"))
+{
+    <p>
+        <a asp-action="Create">Добави рокля</a>
+    </p>
+}
+<table class="table" style="font-family:'Times New Roman', Times, serif">
     <thead>
         <tr>
+            @if (User.IsInRole("Ademin"))
+            {
+                <th>
+                    @Html.DisplayNameFor(model => model.Users)
+            </th>
+            }
             <th>
-                @Html.DisplayNameFor(model => model.Users)
+               @*  @Html.DisplayNameFor(model => model.Dresses) *@
+               Рокля
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Dress)
+               @*  @Html.DisplayNameFor(model => model.Dresses.Size) *@ 
+               Размер
+               
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DateRegister)
+               @*  @Html.DisplayNameFor(model => model.DateRegister) *@
+               Дата
             </th>
             <th></th>
         </tr>
@@ -27,19 +42,29 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
+                @if (User.IsInRole("Admin"))
+                {           
+                <td>
+                @Html.DisplayFor(modelItem => item.Users.UserName)
+                  </td>
+                }
             <td>
-                @Html.DisplayFor(modelItem => item.Users.Id)
+                @Html.DisplayFor(modelItem => item.Dresses.NameDress)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Dress.Id)
-            </td>
-            <td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Dresses.Size)
+                </td>
+                @if (User.IsInRole("Admin"))
+                {     
+                <td>
                 @Html.DisplayFor(modelItem => item.DateRegister)
-            </td>
+                </td>
+                }
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-action="Details" asp-route-id="@item.Id">Промени</a> /
+             @*    <a asp-action="Details" asp-route-id="@item.Id">Детайли</a> / *@
+                <a asp-action="Delete" asp-route-id="@item.Id">Изтрий</a>
+                    
             </td>
         </tr>
 }
